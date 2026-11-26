@@ -26,7 +26,7 @@ import java.util.List;
  * @ClassName:  SysRoleServiceImpl
  * @author:     liuQ
  * @date:       2025-07-28 16:37:15
- * @Copyright   ERIC 微信公众号：Eric的技术杂货库
+ * @Copyright   ERIC 微信公众号：忆笙的技术杂货库
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -140,6 +140,30 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRole> 
 			wrapper.ne(SysRole::getId, excludeId);
 		}
 		return baseMapper.selectCount(wrapper) > 0;
+	}
+
+	/**
+	 * 查询导出数据列表
+	 * @param dto 查询条件
+	 * @return 角色列表
+	 */
+	@Override
+	public List<SysRole> list(SysRoleDTO dto) {
+		QueryWrapper<SysRole> query = new QueryWrapper<>();
+		query.eq("is_delete", IsDeleteEnum.NOT_DELETED.getKey());
+
+		// 添加查询条件
+		if (StringUtils.isNotBlank(dto.getCode())) {
+			query.eq("code", dto.getCode());
+		}
+		if (StringUtils.isNotBlank(dto.getName())) {
+			query.like("name", dto.getName());
+		}
+		if (dto.getStatus() != null) {
+			query.eq("status", dto.getStatus());
+		}
+
+		return baseMapper.selectList(query);
 	}
 
 }

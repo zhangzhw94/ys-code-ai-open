@@ -395,6 +395,17 @@ INSERT INTO `sys_menu` VALUES ('19000000000000000054', '参数配置-查询', '1
 INSERT INTO `sys_menu` VALUES ('19000000000000000055', '参数配置-新增', '11000000000000000015', NULL, '', '', '', 'system:config:add', '', '', 2, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', '', '');
 INSERT INTO `sys_menu` VALUES ('19000000000000000056', '参数配置-修改', '11000000000000000015', NULL, '', '', '', 'system:config:edit', '', '', 3, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', '', '');
 INSERT INTO `sys_menu` VALUES ('19000000000000000057', '参数配置-删除', '11000000000000000015', NULL, '', '', '', 'system:config:delete', '', '', 4, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', '', '');
+INSERT INTO `sys_menu` VALUES ('11000000000000000014', '字典管理', '10000000000000000003', 'systemDict', '/system/dict/index.vue', '', '/system/dict', 'system:dict:list', 'cn cn-zidianguanli', '', 5, 2, 0, 0, 0, 0, 0, 1, '2025-07-31 09:24:15', NULL, NULL);
+INSERT INTO `sys_menu` VALUES ('19000000000000000050', '字典管理-查询', '11000000000000000014', NULL, '', '', '', 'system:dict:query', '', '', 1, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', '', '');
+INSERT INTO `sys_menu` VALUES ('19000000000000000051', '字典管理-新增', '11000000000000000014', NULL, '', '', '', 'system:dict:add', '', '', 2, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', '', '');
+INSERT INTO `sys_menu` VALUES ('19000000000000000052', '字典管理-修改', '11000000000000000014', NULL, '', '', '', 'system:dict:edit', '', '', 3, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', '', '');
+INSERT INTO `sys_menu` VALUES ('19000000000000000053', '字典管理-删除', '11000000000000000014', NULL, '', '', '', 'system:dict:delete', '', '', 4, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', '', '');
+-- 期12 开源：文件管理菜单（逐字取自闭源 ys-basic.sql 第 1416/1482-1485 行）
+INSERT INTO `sys_menu` VALUES ('11000000000000000017', '文件管理', '10000000000000000003', 'systemFileinfo', '/system/fileinfo/index.vue', '', '/system/fileinfo', 'system:fileinfo:list', 'cn cn-wenjianjia1', '', 7, 2, 0, 0, 0, 0, 0, 1, '2025-07-31 09:24:15', NULL, NULL);
+INSERT INTO `sys_menu` VALUES ('19000000000000000080', '文件管理-查询', '11000000000000000017', NULL, NULL, NULL, NULL, 'system:fileinfo:query', NULL, NULL, 1, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', NULL, NULL);
+INSERT INTO `sys_menu` VALUES ('19000000000000000081', '文件管理-上传', '11000000000000000017', NULL, NULL, NULL, NULL, 'system:fileinfo:upload', NULL, NULL, 2, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', NULL, NULL);
+INSERT INTO `sys_menu` VALUES ('19000000000000000082', '文件管理-下载', '11000000000000000017', NULL, NULL, NULL, NULL, 'system:fileinfo:download', NULL, NULL, 3, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', NULL, NULL);
+INSERT INTO `sys_menu` VALUES ('19000000000000000083', '文件管理-删除', '11000000000000000017', NULL, NULL, NULL, NULL, 'system:fileinfo:delete', NULL, NULL, 4, 3, 0, 0, 0, 0, 0, 1, '2025-07-31 09:27:03', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -565,6 +576,11 @@ INSERT INTO `sys_role_menu` VALUES ('1949738202609135222', '19000000000000000054
 INSERT INTO `sys_role_menu` VALUES ('1949738202609135222', '19000000000000000055');
 INSERT INTO `sys_role_menu` VALUES ('1949738202609135222', '19000000000000000056');
 INSERT INTO `sys_role_menu` VALUES ('1949738202609135222', '19000000000000000057');
+INSERT INTO `sys_role_menu` VALUES ('1949738202609135222', '11000000000000000014');
+INSERT INTO `sys_role_menu` VALUES ('1949738202609135222', '19000000000000000050');
+INSERT INTO `sys_role_menu` VALUES ('1949738202609135222', '19000000000000000051');
+INSERT INTO `sys_role_menu` VALUES ('1949738202609135222', '19000000000000000052');
+INSERT INTO `sys_role_menu` VALUES ('1949738202609135222', '19000000000000000053');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -687,5 +703,89 @@ INSERT INTO `sys_user_role` VALUES ('2000000000000000002', '1949738202609135222'
 INSERT INTO `sys_user_role` VALUES ('2000000000000000003', '1949738202609135222');
 INSERT INTO `sys_user_role` VALUES ('2000000000000000008', '1955154995175673857');
 INSERT INTO `sys_user_role` VALUES ('2000000000000000008', '1955155180035428353');
+
+-- ----------------------------
+-- Table structure for sys_dict
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict`;
+CREATE TABLE `sys_dict`  (
+  `id` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
+  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '编码',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `descript` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `status` int NULL DEFAULT 1 COMMENT '状态 0.禁用 1.正常',
+  `is_delete` tinyint NULL DEFAULT 1 COMMENT '删除状态 0.已删除 1.正常',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
+  `create_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '字典管理表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_dict
+-- ----------------------------
+INSERT INTO `sys_dict` VALUES ('1950439175367376901', 'common_status', '通用状态', '通用的启用/停用状态字典，用于系统通用状态（启用/停用）的字典项维护', 1, 1, '2025-07-31 09:24:15', '1949738202609135617', '超级管理员');
+
+-- ----------------------------
+-- Table structure for sys_dict_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_detail`;
+CREATE TABLE `sys_dict_detail`  (
+  `id` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
+  `dict_id` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字典主表id',
+  `dict_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字典主表编码',
+  `code` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '编码',
+  `name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `seq` int NULL DEFAULT NULL COMMENT '序号',
+  `is_delete` tinyint NULL DEFAULT 1 COMMENT '删除状态 0.已删除 1.正常',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
+  `create_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人名称',
+  `tag_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标签类型（primary/success/warning/danger/info）',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '字典管理明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_dict_detail
+-- ----------------------------
+INSERT INTO `sys_dict_detail` VALUES ('1950440156679311371', '1950439175367376901', 'common_status', '1', '启用', 1, 1, '2025-07-31 09:24:15', '1949738202609135617', '超级管理员', 'success');
+INSERT INTO `sys_dict_detail` VALUES ('1950440156679311372', '1950439175367376901', 'common_status', '0', '禁用', 2, 1, '2025-07-31 09:24:15', '1949738202609135617', '超级管理员', 'danger');
+
+-- ----------------------------
+-- Table structure for sys_fileinfo（期11 开源：基础文件上传，简化版）
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_fileinfo`;
+CREATE TABLE `sys_fileinfo`  (
+  `id` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
+  `business_id` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务id',
+  `file_key` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文件唯一标识(MD5+时间戳)',
+  `file_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件名',
+  `file_hash` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文件哈希值(SHA-256)',
+  `original_filename` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '真实文件名',
+  `category` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件种类',
+  `file_path` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件存储路径',
+  `temp_path` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '临时路径',
+  `file_size` bigint NULL DEFAULT 0 COMMENT '文件大小',
+  `file_size_str` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件大小描述',
+  `byte_size` bigint NULL DEFAULT NULL COMMENT '文件字节大小',
+  `suffix` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '后缀名',
+  `file_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件类型',
+  `file_md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件MD5值',
+  `storage_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '存储类型(0:本地,1:MinIO)',
+  `bucket_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'MinIO桶名',
+  `is_directory` tinyint NOT NULL DEFAULT 0 COMMENT '是否是目录',
+  `parent_id` bigint NULL DEFAULT NULL COMMENT '父目录ID',
+  `chunk_info` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '分片信息(JSON格式)',
+  `upload_status` int NULL DEFAULT NULL COMMENT '上传状态(0:上传中,1:上传完成,2:上传失败)',
+  `download_count` bigint NULL DEFAULT NULL COMMENT '下载次数',
+  `path_hierarchy` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '目录结构路径',
+  `thumbnail_path` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '缩略图路径',
+  `extra_info` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '文件扩展属性(JSON格式)',
+  `is_delete` tinyint NULL DEFAULT 1 COMMENT '删除状态 0.已删除 1.正常',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人id',
+  `create_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '文件管理' ROW_FORMAT = DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS = 1;

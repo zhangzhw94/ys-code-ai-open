@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
  * @ClassName:   SysUserServiceImpl
  * @author:      liuQ
  * @date:        2025-07-23 12:29:26
- * @Copyright    ERIC 微信公众号：Eric的技术杂货库
+ * @Copyright    ERIC 微信公众号：忆笙的技术杂货库
  */
 @Slf4j
 @Service
@@ -372,6 +372,42 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	@Override
 	public List<SysUser> getAllUsers() {
 		return baseMapper.selectList(null);
+	}
+
+	/**
+	 * 查询导出数据列表
+	 * @param dto 查询条件
+	 * @return 用户列表
+	 */
+	@Override
+	public List<SysUser> list(SysUserDTO dto) {
+		QueryWrapper<SysUser> query = new QueryWrapper<>();
+		query.eq("is_delete", IsDeleteEnum.NOT_DELETED.getKey());
+
+		// 添加查询条件
+		if (StringUtils.isNotBlank(dto.getLoginName())) {
+			query.like("login_name", dto.getLoginName());
+		}
+		if (StringUtils.isNotBlank(dto.getUserName())) {
+			query.like("real_name", dto.getUserName());
+		}
+		if (StringUtils.isNotBlank(dto.getPhone())) {
+			query.like("phone", dto.getPhone());
+		}
+		if (StringUtils.isNotBlank(dto.getEmail())) {
+			query.like("email", dto.getEmail());
+		}
+		if (StringUtils.isNotBlank(dto.getDepartId())) {
+			query.eq("depart_id", dto.getDepartId());
+		}
+		if (dto.getStatus() != null) {
+			query.eq("status", dto.getStatus());
+		}
+		if (dto.getUserType() != null) {
+			query.eq("user_type", dto.getUserType());
+		}
+
+		return baseMapper.selectList(query);
 	}
 
 }

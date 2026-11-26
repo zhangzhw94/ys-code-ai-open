@@ -12,7 +12,7 @@ import java.util.List;
  * @ClassName:  SysDepartService     
  * @author:     liuQ
  * @date:       2025-09-10 15:22:32
- * @Copyright   ERIC 微信公众号：Eric的技术杂货库
+ * @Copyright   ERIC 微信公众号：忆笙的技术杂货库
  */
 public interface SysDepartService extends BaseService<SysDepartDTO, SysDepart> {
 
@@ -21,4 +21,11 @@ public interface SysDepartService extends BaseService<SysDepartDTO, SysDepart> {
      * @return
      */
     List<SelectTreeVo> selectDeptTree();
+
+    /**
+     * 查询导出数据列表
+     * @param dto 查询条件
+     * @return 部门列表
+     */
+    List<SysDepart> list(SysDepartDTO dto);
 }

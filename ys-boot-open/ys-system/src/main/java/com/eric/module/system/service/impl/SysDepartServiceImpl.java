@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * @ClassName:  SysDepartServiceImpl     
  * @author:     liuQ
  * @date:       2025-09-10 15:22:32
- * @Copyright   ERIC 微信公众号：Eric的技术杂货库
+ * @Copyright   ERIC 微信公众号：忆笙的技术杂货库
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -113,6 +113,33 @@ public class SysDepartServiceImpl extends BaseServiceImpl<SysDepartMapper, SysDe
 					return node;
 				})
 				.collect(Collectors.toList());
+	}
+
+	/**
+	 * 查询导出数据列表
+	 * @param dto 查询条件
+	 * @return 部门列表
+	 */
+	@Override
+	public List<SysDepart> list(SysDepartDTO dto) {
+		QueryWrapper<SysDepart> query = new QueryWrapper<>();
+		query.eq("is_delete", IsDeleteEnum.NOT_DELETED.getKey());
+
+		// 添加查询条件
+		if (org.apache.commons.lang3.StringUtils.isNotBlank(dto.getName())) {
+			query.like("name", dto.getName());
+		}
+		if (org.apache.commons.lang3.StringUtils.isNotBlank(dto.getCode())) {
+			query.eq("code", dto.getCode());
+		}
+		if (dto.getStatus() != null) {
+			query.eq("status", dto.getStatus());
+		}
+		if (dto.getCategory() != null) {
+			query.eq("category", dto.getCategory());
+		}
+
+		return baseMapper.selectList(query);
 	}
 
 }

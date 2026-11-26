@@ -11,7 +11,7 @@ import java.util.List;
  * @ClassName:  SysRoleService     
  * @author:     liuQ
  * @date:       2025-07-23 14:38:08
- * @Copyright   ERIC 微信公众号：Eric的技术杂货库
+ * @Copyright   ERIC 微信公众号：忆笙的技术杂货库
  */
 public interface SysRoleService extends BaseService<SysRoleDTO, SysRole> {
 
@@ -35,4 +35,11 @@ public interface SysRoleService extends BaseService<SysRoleDTO, SysRole> {
      * @return
      */
     List<SysRole> getRoleList();
+
+    /**
+     * 查询导出数据列表
+     * @param dto 查询条件
+     * @return 角色列表
+     */
+    List<SysRole> list(SysRoleDTO dto);
 }
